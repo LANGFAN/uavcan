@@ -1,6 +1,19 @@
 #
 # Simple RPM setpoint.
-# Negative values indicate reverse rotation.
+# Negative values indicate reverse rotation.(deprecated)
+# For safety's sake, no negative rpm cmd, so using uint
+# 2^14 = 16384, as for FOC of low kv brushless DC motor, it's large enough
 #
 
-int18[<=20] rpm
+#uint16[<=20] rpm
+
+# DSP's CAN mailbox receive data once every 8 bytes
+# if last frame is 5 byte or some other num, not 8 bytes
+# DSP receives 8 bytes too, so it can't itentify which frame is last frame
+# so here define rpm 8 bit
+# quadcopter, hexacopter or octacopter, all vechicle send 19 bytes
+# it will be three frames sent to ESC
+# and uavcan data frame tail byte will be the eigth byte
+# ESC firmware can decode data frame conveniently
+
+uint8[<=21] rpm

@@ -1,0 +1,9 @@
+#
+# propellers must be located at specific point when not rotating,
+# then UAV takeoff platform can get out of carriage
+# when flight controller send prop_reloc_cmd 1 to ESC, ESC will relocate propellers automatically at proper loc
+# this flag don't need be sent uninterruptly
+# just when flight controller received relocating propellers cmd or ...
+#
+
+bool[<=20] prop_reloc_cmd
